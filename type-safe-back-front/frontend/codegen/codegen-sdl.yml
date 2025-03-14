@@ -1,0 +1,6 @@
+overwrite: true
+schema: "http://localhost:8080/query"
+generates:
+  generated/gql/sdl.graphql:
+    plugins:
+      - "schema-ast"

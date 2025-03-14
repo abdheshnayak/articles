@@ -1,0 +1,32 @@
+version: '3'
+
+dotenv:
+  - .secrets/env
+
+tasks:
+  default:
+    cmds:
+      - nodemon -q -e "go" --signal SIGTERM --exec "task run"
+  run:
+    cmds:
+      - go run .
+
+  # using github.com/abdheshnayak/struct-to-gql
+  gql:
+    env:
+      working_dir: ./app/routes/_struct-to-graphql
+    cmds:
+      - mkdir -p "$working_dir"
+      - go run github.com/abdheshnayak/struct-to-gql
+          --struct example/todoapp/app/entities.Todo
+        > $working_dir/main.go
+      - |+
+        pushd "$working_dir"
+        go run main.go --dev --out-dir ../graph/struct-to-graphql 
+        popd
+      - rm -rf $working_dir
+
+      - |+
+        pushd app/routes 
+        go run github.com/99designs/gqlgen generate
+        popd

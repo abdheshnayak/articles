@@ -1,0 +1,18 @@
+overwrite: true
+schema: "http://localhost:8080/query"
+generates:
+  generated/types/server.ts:
+    documents:
+      - generated/gql/*.graphql
+    plugins:
+      - "typescript"
+      - typescript-operations
+    config:
+      onlyOperationTypes: true
+      skipTypename: true
+      ignoreEnumValuesFromSchema: true
+      enumsAsTypes: true
+      maybeValue: 'T'
+    hooks:
+      afterOneFileWrite:
+        - 'eslint --fix'

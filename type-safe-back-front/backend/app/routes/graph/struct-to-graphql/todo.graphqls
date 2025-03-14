@@ -1,0 +1,11 @@
+type Todo @shareable {
+  done: Boolean!
+  Model: Gorm__io___gorm__Model!
+  title: String!
+}
+
+input TodoIn {
+  done: Boolean!
+  title: String!
+}
+

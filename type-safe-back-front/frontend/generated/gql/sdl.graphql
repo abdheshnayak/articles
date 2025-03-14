@@ -1,0 +1,97 @@
+directive @authenticated on ENUM | FIELD_DEFINITION | INTERFACE | OBJECT | SCALAR
+
+directive @composeDirective(name: String!) on SCHEMA
+
+"""
+The @defer directive may be specified on a fragment spread to imply de-prioritization, that causes the fragment to be omitted in the initial response, and delivered as a subsequent response afterward. A query with @defer directive will cause the request to potentially return multiple responses, where non-deferred data is delivered in the initial response and data deferred delivered in a subsequent response. @include and @skip take precedence over @defer.
+"""
+directive @defer(if: Boolean = true, label: String) on FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+directive @extends on INTERFACE | OBJECT
+
+directive @external on FIELD_DEFINITION | OBJECT
+
+directive @goField(forceResolver: Boolean, name: String) on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @inaccessible on ARGUMENT_DEFINITION | ENUM | ENUM_VALUE | FIELD_DEFINITION | INPUT_FIELD_DEFINITION | INPUT_OBJECT | INTERFACE | OBJECT | SCALAR | UNION
+
+directive @interfaceObject on OBJECT
+
+directive @key(fields: FieldSet!, resolvable: Boolean = true) on INTERFACE | OBJECT
+
+directive @link(import: [String!], url: String!) on SCHEMA
+
+directive @override(from: String!, label: String) on FIELD_DEFINITION
+
+directive @policy(policies: [[federation__Policy!]!]!) on ENUM | FIELD_DEFINITION | INTERFACE | OBJECT | SCALAR
+
+directive @provides(fields: FieldSet!) on FIELD_DEFINITION
+
+directive @requires(fields: FieldSet!) on FIELD_DEFINITION
+
+directive @requiresScopes(scopes: [[federation__Scope!]!]!) on ENUM | FIELD_DEFINITION | INTERFACE | OBJECT | SCALAR
+
+directive @shareable on FIELD_DEFINITION | OBJECT
+
+directive @tag(name: String!) on ARGUMENT_DEFINITION | ENUM | ENUM_VALUE | FIELD_DEFINITION | INPUT_FIELD_DEFINITION | INPUT_OBJECT | INTERFACE | OBJECT | SCALAR | UNION
+
+scalar Any
+
+scalar Date
+
+scalar FieldSet
+
+type Gorm__io___gorm__DeletedAt {
+  Time: Date!
+  Valid: Boolean!
+}
+
+type Gorm__io___gorm__Model {
+  CreatedAt: Date!
+  DeletedAt: Gorm__io___gorm__DeletedAt!
+  ID: Int!
+  UpdatedAt: Date!
+}
+
+scalar Json
+
+scalar Map
+
+type Mutation {
+  createTodo(input: TodoIn!): Todo!
+  updateTodo(id: ID!, input: TodoIn!): Todo!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  startCursor: String
+}
+
+type Query {
+  _service: _Service!
+  todo(id: ID!): Todo
+  todos: [Todo!]!
+}
+
+type Todo {
+  Model: Gorm__io___gorm__Model!
+  done: Boolean!
+  title: String!
+}
+
+input TodoIn {
+  done: Boolean!
+  title: String!
+}
+
+scalar _Any
+
+type _Service {
+  sdl: String
+}
+
+scalar federation__Policy
+
+scalar federation__Scope

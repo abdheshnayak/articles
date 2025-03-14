@@ -1,0 +1,19 @@
+type Gorm__io___gorm__DeletedAt @shareable {
+  Time: Date!
+  Valid: Boolean!
+}
+
+type Gorm__io___gorm__Model @shareable {
+  CreatedAt: Date!
+  DeletedAt: Gorm__io___gorm__DeletedAt!
+  ID: Int!
+  UpdatedAt: Date!
+}
+
+type PageInfo @shareable {
+  endCursor: String
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  startCursor: String
+}
+
